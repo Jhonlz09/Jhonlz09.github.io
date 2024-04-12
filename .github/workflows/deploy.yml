@@ -23,7 +23,6 @@ jobs:
       - name: Install, build, and upload your site
         uses: withastro/action@v2
         with:
-          options: |
             package-manager: pnpm@latest 
           # También puedes agregar otras opciones aquí si es necesario.
           # path: . # The root location of your Astro project inside the repository. (optional)
