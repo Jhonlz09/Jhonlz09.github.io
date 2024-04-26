@@ -4,13 +4,9 @@ const { title } = Astro.props;
 ---
 
 <section>
-  {title && <h2>{title}</h2>}
+  {title && <h2 style="display:flex;align-items:center;gap:4px">{title}</h2>}
   <slot />
 </section>
-
-<script>
-  // se ejecuta en el cliente <----
-</script>
 
 <style>
   section {
