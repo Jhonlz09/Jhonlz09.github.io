@@ -17,8 +17,8 @@
     "profiles": [
       {
         "network": "LinkedIn",
-        "username": "midudev",
-        "url": "https://linkedin.com/in/jhonlz2011"
+        "username": "jhon leon",
+        "url": "https://www.linkedin.com/in/jhon-leon-006595182/"
       },
       {
         "network": "GitHub",
@@ -34,7 +34,7 @@
       "url": "https://aistermcon.com",
       "startDate": "2020-06-15",
       "endDate": "2021-04-15",
-      "summary": "Responsable de liderar el sistema de inventario y la administración del servidor web garantizando la precisión y actualización constante del inventario.",
+      "summary": "Responsable de liderar el sistema de inventario y la administración del servidor web garantizando la precisión y actualización constante del inventario. Mi tiempo en este rol me permitió desarrollar habilidades sólidas en la gestión de inventario, así como experiencia técnica en la administración de servidores y aplicaciones web.",
       "highlights": [
         "Started the company"
       ]
@@ -209,33 +209,35 @@
   }],
   "projects": [
     {
-      "name": "mars.codes",
+      "name": "Docusmart",
       "isActive": true,
-      "description": "Historia interactiva con retos de programación para viajar a Marte",
+      "description": "Plataforma web integral para la gestión eficiente de documentos educativos, integrada con la API de Google Drive.",
       "highlights": [
-        "Elige tu propia aventura",
-        "En desarrollo"
+        "Google Drive",
+        "Guardar archivos",
+        "Diseño amigable"
       ],
       "url": "https://mars.codes"
     },
     {
-      "name": "AdventJS",
+      "name": "Aistermcon",
       "isActive": true,
-      "description": "Retos de programación en JavaScript para cada día de diciembre hasta Navidad",
+      "description": "Solución completa con una variedad de funciones clave y eficientes para optimizar la administración del inventario",
       "highlights": [
-        "+1 millón de visitas",
-        "Multidioma",
-        "JavaScript & TypeScript"
+        "Inventario",
+        "Emitir facturas",
+        "En desarrollo"
       ],
       "url": "https://adventjs.dev"
     },
     {
-      "name": "Codember",
+      "name": "ShopZone",
       "isActive": true,
-      "description": "Juego interactivo de programación con retos y secretos",
+      "description": "E-commerce que ofrece una experiencia de compra en línea fácil y segura.",
       "highlights": [
-        "+2000 usuarios activos",
-        "Retos para cualquier lenguaje"
+        "Explorar",
+        "Carro de compra",
+        "Gestionar Pedidos"
       ],
       "url": "https://codember.dev"
     }
