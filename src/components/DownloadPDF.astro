@@ -1,0 +1,66 @@
+---
+// Componente para descargar el currículum en formato PDF de forma nativa.
+---
+
+<button id="download-pdf-btn" class="no-print" title="Descargar Currículum (PDF ATS-friendly)">
+  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+    <polyline points="7 10 12 15 17 10"></polyline>
+    <line x1="12" y1="15" x2="12" y2="3"></line>
+  </svg>
+  <span>Descargar CV</span>
+</button>
+
+<script>
+  // Añadimos un event listener al botón post-render
+  document.getElementById('download-pdf-btn')?.addEventListener('click', () => {
+    // Forzamos la apertura del modal de impresión del sistema
+    window.print();
+  });
+</script>
+
+<style>
+  #download-pdf-btn {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--text-primary);
+    color: var(--bg-base);
+    border: none;
+    border-radius: 9999px;
+    padding: 0.75rem 1.25rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.3s ease;
+    z-index: 999;
+  }
+
+  #download-pdf-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px -5px rgba(255, 255, 255, 0.1);
+    background: #ffffff;
+  }
+
+  @media (max-width: 700px) {
+    #download-pdf-btn {
+      bottom: 1.5rem;
+      right: 1.5rem;
+      padding: 0.6rem;
+    }
+    #download-pdf-btn span {
+      display: none; /* Hide text on mobile, keep just icon */
+    }
+  }
+
+  /* El botón no debe aparecer jamás al momento de imprimir */
+  @media print {
+    #download-pdf-btn {
+      display: none !important;
+    }
+  }
+</style>

@@ -2,9 +2,10 @@
 import Section from "../Section.astro"
 
 import { work } from "@cv"
+const { class: className } = Astro.props;
 ---
 
-<Section title="Experiencia laboral">
+<Section title="Experiencia" class={`experience-section ${className || ''}`}>
   <ul>
     {
       work.map(
@@ -43,6 +44,18 @@ import { work } from "@cv"
 
                 <footer>
                   <p>{summary}</p>
+                  {
+                    highlights && highlights.length > 0 && (
+                      <ul class="highlights">
+                        {highlights.map((highlight) => (
+                          <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>
+                            <span>{highlight}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    )
+                  }
                 </footer>
               </article>
             </li>
@@ -57,24 +70,25 @@ import { work } from "@cv"
   ul {
     display: flex;
     flex-direction: column;
-    gap: 32px;
+    gap: var(--sp-6);
   }
 
   article h3 {
     font-weight: 500;
-    color: #111;
+    color: var(--text-primary);
   }
 
   article a {
-    color: #111;
+    color: var(--text-primary);
   }
 
   article a:hover {
     text-decoration: underline;
+    color: var(--accent);
   }
 
   article h4 {
-    color: #222;
+    color: var(--text-muted);
     font-weight: 400;
   }
 
@@ -86,12 +100,47 @@ import { work } from "@cv"
   }
 
   time {
-    color: #555;
-    font-size: 0.85rem;
+    color: var(--text-tertiary);
+    font-size: var(--fs-xs);
     min-width: 102px;
     cursor: default;
   }
 
+  /* ─── Highlights Grid ─── */
+  .highlights {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .highlights li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 14px;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-sm);
+    font-size: var(--fs-xs);
+    color: var(--text-secondary);
+    line-height: 1.5;
+    transition: border-color var(--duration-fast) var(--ease-out);
+  }
+
+  .highlights li:hover {
+    border-color: var(--border-hover);
+  }
+
+  .highlights li svg {
+    flex-shrink: 0;
+    margin-top: 2px;
+    color: var(--accent);
+  }
+
+  /* ─── Tooltips ─── */
   [data-title]:hover:after {
     opacity: 1;
     transition: all 0.1s ease-in-out 0.5s;
@@ -100,18 +149,18 @@ import { work } from "@cv"
 
   [data-title]:after {
     content: attr(data-title);
-    background-color: #333;
-    color: #fff;
+    background-color: var(--bg-card);
+    color: var(--text-primary);
     font-size: .75rem;
-    font-family: Menlo, Monaco, Lucida Console, "Courier New", monospace;;
+    font-family: inherit;
     position: absolute;
     padding: .2rem .5rem;
     bottom: -1.4rem;
     left: 50%;
     white-space: nowrap;
-    box-shadow: 1px 1px 1px #222222;
+    box-shadow: 1px 1px 1px rgba(0,0,0,0.5);
     opacity: 0;
-    border: 1px solid #111111;
+    border: 1px solid var(--border-card);
     z-index: 99999;
     visibility: hidden;
     border-radius: 6px;
@@ -121,9 +170,31 @@ import { work } from "@cv"
     position: relative;
   }
 
+  /* ─── Responsive ─── */
   @media (width <= 700px) {
     time {
       text-align: right;
+    }
+
+    .highlights {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* ─── Print ─── */
+  @media print {
+    .highlights {
+      border-top: 1px solid #ccc !important;
+    }
+
+    .highlights li {
+      background: transparent !important;
+      border: 1px solid #ccc !important;
+      color: #000 !important;
+    }
+
+    .highlights li svg {
+      color: #000 !important;
     }
   }
 </style>

@@ -19,6 +19,9 @@ const { image, summary, url } = basics
     <meta name="description" content={summary} />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="preload" as="image" href={image} />
 
     <meta property="og:url" content={url} />
@@ -40,16 +43,82 @@ const { image, summary, url } = basics
 </html>
 
 <style is:global>
+  :root {
+    /* Surfaces */
+    --bg-base: #09090b;
+    --bg-card: #111113;
+    --bg-elevated: #1a1a1e;
+    --bg-overlay: rgba(0, 0, 0, 0.7);
+
+    /* Borders */
+    --border-subtle: rgba(255, 255, 255, 0.06);
+    --border-default: rgba(255, 255, 255, 0.1);
+    --border-hover: rgba(255, 255, 255, 0.18);
+    --border-card: rgba(255, 255, 255, 0.06);
+
+    /* Text */
+    --text-primary: #fafafa;
+    --text-secondary: #a1a1aa;
+    --text-tertiary: #71717a;
+    --text-muted: #a1a1aa;
+
+    /* Accents */
+    --accent: #8b5cf6;
+    --accent-hover: #7c3aed;
+    --accent-subtle: rgba(139, 92, 246, 0.12);
+    --accent-glow: #06b6d4;
+
+    /* Type Scale (Major Third 1.25) */
+    --fs-xs: 0.75rem;
+    --fs-sm: 0.875rem;
+    --fs-base: 1rem;
+    --fs-lg: 1.125rem;
+    --fs-xl: 1.25rem;
+    --fs-2xl: 1.5rem;
+    --fs-3xl: 2rem;
+    --fs-4xl: 2.5rem;
+    --fs-display: 3.25rem;
+
+    /* Spacing (4px base) */
+    --sp-1: 0.25rem;
+    --sp-2: 0.5rem;
+    --sp-3: 0.75rem;
+    --sp-4: 1rem;
+    --sp-6: 1.5rem;
+    --sp-8: 2rem;
+    --sp-12: 3rem;
+    --sp-16: 4rem;
+
+    /* Radii */
+    --radius-sm: 6px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 20px;
+    --radius-full: 9999px;
+
+    /* Transitions */
+    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+    --duration-fast: 150ms;
+    --duration-normal: 250ms;
+  }
+
   html {
-    font-family:
-      Menlo,
-      Monaco,
-      Lucida Console,
-      "Courier New",
-      Courier,
-      monospace;
-    background: #fff;
-    letter-spacing: -0.025rem;
+    font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg-base);
+    color: var(--text-primary);
+    letter-spacing: -0.011em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 0.04;
+    pointer-events: none;
+    z-index: 1;
   }
 
   ::-webkit-scrollbar {
@@ -97,24 +166,13 @@ const { image, summary, url } = basics
   h3,
   h4 {
     margin: 0;
-    font-family:
-      system-ui,
-      -apple-system,
-      BlinkMacSystemFont,
-      "Segoe UI",
-      Roboto,
-      Oxygen,
-      Ubuntu,
-      Cantarell,
-      "Open Sans",
-      "Helvetica Neue",
-      sans-serif;
+    font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   }
 
   p {
-    color: #666;
-    font-size: 0.9rem;
-    line-height: 1.5;
+    color: var(--text-secondary);
+    font-size: var(--fs-sm);
+    line-height: 1.6;
     margin: 0;
     text-wrap: pretty;
   }
@@ -124,6 +182,20 @@ const { image, summary, url } = basics
   }
 
   @media print {
+    :root {
+      --bg-base: #ffffff;
+      --bg-card: #ffffff;
+      --border-card: transparent;
+      --text-primary: #000000;
+      --text-muted: #333333;
+      --accent: #000000;
+      --accent-glow: transparent;
+    }
+
+    body::before {
+      display: none !important;
+    }
+
     .no-print {
       display: none !important;
     }
@@ -132,12 +204,47 @@ const { image, summary, url } = basics
       display: block !important;
     }
 
+    html {
+      background: #ffffff;
+      color: #000000;
+    }
+
+    body {
+      padding: 0;
+      margin: 0;
+    }
+
     astro-dev-toolbar {
       display: none !important;
     }
 
+    main {
+      padding: 0 !important;
+      display: block !important;
+    }
+
+    /* Remove Bento Card styling on print */
+    section {
+      border: none !important;
+      background: transparent !important;
+      padding: 1rem 0 !important;
+      margin-bottom: 0.5rem !important;
+      break-inside: avoid;
+    }
+
     article {
       break-inside: avoid;
+      border: none !important;
+      background: transparent !important;
+      padding: 0 !important;
+      box-shadow: none !important;
+    }
+
+    h1, h2, h3, h4, p, span, li, time {
+      color: #000000 !important;
+      -webkit-text-fill-color: #000000 !important;
+      background: transparent !important;
+      text-shadow: none !important;
     }
   }
 </style>

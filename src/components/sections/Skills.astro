@@ -39,41 +39,76 @@ const SKILLS_ICONS: Record<string, any> = {
   Php,
   Python
 }
+const { class: className } = Astro.props;
 ---
 
-<Section title="Habilidades">
-  <ul>
+<Section title="Stack Tecnológico" class={`skills-section ${className || ''}`}>
+  <div class="skills-container">
     {
-      skills.map(({ name }) => {
-        const iconName = name === "Next.js" ? "Next" : name
-        const Icon = SKILLS_ICONS[iconName]
-
-        return (
-          <li>
-            {Icon && <Icon />} <span>{name}</span>
-          </li>
-        )
-      })
+      skills.map(({ name, keywords }) => (
+        <div class="skill-group">
+          <h3>{name}</h3>
+          <ul>
+            {keywords.map((keyword) => {
+              const iconName = keyword === "Next.js" ? "Next" : keyword === "Tailwind CSS" ? "Tailwind" : keyword === "Node.js" ? "Node" : keyword
+              const Icon = SKILLS_ICONS[iconName]
+      
+              return (
+                <li>
+                  {Icon && <Icon />} <span>{keyword}</span>
+                </li>
+              )
+            })}
+          </ul>
+        </div>
+      ))
     }
-  </ul>
+  </div>
 </Section>
 
 <style>
+  .skills-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .skill-group h3 {
+    font-size: var(--fs-xs);
+    color: var(--text-tertiary);
+    margin-bottom: var(--sp-3);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+  }
   ul {
     display: inline-flex;
-    gap: 8px;
+    gap: var(--sp-2);
     flex-wrap: wrap;
   }
 
   li {
     align-items: center;
-    background: #eee;
-    border-radius: 6px;
-    color: black;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-sm);
+    color: var(--text-primary);
     display: flex;
-    font-size: 0.8rem;
+    font-size: var(--fs-sm);
     font-weight: 500;
-    gap: 4px;
-    padding: 0.2rem 0.6rem;
+    gap: var(--sp-2);
+    padding: var(--sp-1) var(--sp-3);
+  }
+
+  @media print {
+    li {
+      background: transparent !important;
+      border: 1px solid #ccc !important;
+      color: #000 !important;
+      page-break-inside: avoid;
+    }
+    .skill-group h3 {
+      color: #000 !important;
+    }
   }
 </style>

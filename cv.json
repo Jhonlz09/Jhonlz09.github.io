@@ -1,245 +1,258 @@
 {
   "basics": {
     "name": "John Douglas León",
-    "label": "Desarrollador de software especializado en proyectos web. Comprometido con la excelencia técnica y el aprendizaje continuo",
+    "label": "Full-Stack Developer · Arquitecturas de Alto Rendimiento",
     "image": "/me.webp",
     "email": "jhonlz2011@hotmail.com",
     "phone": "+593 991266859",
     "url": "",
-    "summary": "Soy un entusiasta desarrollador web con más de 2 años de experiencia. Disfruto creando soluciones innovadoras y trabajando en equipo para superar desafíos técnicos. Siempre estoy abierto a nuevos retos y emocionado por lo que el futuro de la tecnología nos depara.",
+    "summary": "+3 años diseñando ERPs financieros, microservicios de IA y sistemas de facturación electrónica con stacks modernos (SolidJS, Bun, PostgreSQL).",
     "location": {
       "address": "",
       "postalCode": "090601",
       "city": "Guayaquil",
-      "countryCode": "ES",
+      "countryCode": "EC",
       "region": "Ecuador"
     },
     "profiles": [
       {
         "network": "LinkedIn",
-        "username": "jhon leon",
+        "username": "jhonlz2011",
         "url": "https://www.linkedin.com/in/jhon-leon-006595182/"
       },
       {
         "network": "GitHub",
-        "username": "midudev",
-        "url": "https://github.com/midudev"
+        "username": "John Douglas León",
+        "url": "https://github.com/Jhonlz09"
       }
     ]
   },
   "work": [
     {
-      "name": "Aistermcon S.A",
-      "position": "Jefe de bodega",
+      "name": "Aistermcon S.A.",
+      "position": "Administrador de Sistemas e Infraestructura (Sysadmin)",
       "url": "https://aistermcon.com",
-      "startDate": "2020-06-15",
-      "endDate": "2021-04-15",
-      "summary": "Responsable de liderar el sistema de inventario y la administración del servidor web garantizando la precisión y actualización constante del inventario. Mi tiempo en este rol me permitió desarrollar habilidades sólidas en la gestión de inventario, así como experiencia técnica en la administración de servidores y aplicaciones web.",
-      "highlights": [
-        "Started the company"
-      ]
+      "startDate": "2023-06-15",
+      "endDate": "2026-01-15",
+     "summary": "Responsable de la disponibilidad y escalabilidad del ecosistema crítico de la empresa. Gestioné el ciclo de vida completo de producción del ERP corporativo, optimizando despliegues en entornos on-premise (Ubuntu Server) y garantizando la integridad de los datos mediante estrategias de Disaster Recovery y endurecimiento de seguridad (Hardening).",
+  "highlights": [
+    "Lideré la transformación digital de la empresa mediante la implementación y despliegue integral del sistema de gestión operativa.",
+    "Aseguré un uptime del 99.9% mediante la administración proactiva de infraestructura Linux y tuning de bases de datos MySQL.",
+    "Automaticé el ciclo de backups y tareas de mantenimiento mediante scripts (Bash), reduciendo el riesgo de pérdida de datos a cero.",
+    "Implementé políticas de seguridad perimetral y gestión de accesos para proteger los activos digitales de la compañía."
+  ]
     }
   ],
-  "volunteer": [{
-    "organization": "Organization",
-    "position": "Volunteer",
-    "url": "https://organization.com/",
-    "startDate": "2012-01-01",
-    "endDate": "2013-01-01",
-    "summary": "Description…",
-    "highlights": [
-      "Awarded 'Volunteer of the Month'"
-    ]
-  }],
-  "education": [{
-    "institution": "Academia Naval Almirante Illingworth",
-    "url": "https://anai.edu.ec/",
-    "area": "Bachillerato en Ciencias",
-    "studyType": "Bachelor",
-    "startDate": "2013-01-01",
-    "endDate": "2020-01-01",
-    "score": "4.0",
-    "courses": [
-      "DB1101 - Basic SQL"
-    ]
-  },{
-    "institution": "Tecnológico Universitario Espíritu Santo",
-    "url": "https://academico.tes.edu.ec/",
-    "area": "Desarrollo de Software",
-    "studyType": "3er Nivel",
-    "startDate": "2021-01-01",
-    "endDate": "2024-04-01",
-    "score": "4.0",
-    "courses": [
-      "DB1101 - Basic SQL"
-    ]
-  }],
-  "awards": [{
-    "title": "Award",
-    "date": "2014-11-01",
-    "awarder": "Company",
-    "summary": "There is no spoon."
-  }],
-  "certificates": [{
-    "name": "Certificate",
-    "date": "2021-11-07",
-    "issuer": "Company",
-    "url": "https://certificate.com"
-  }],
-  "publications": [{
-    "name": "Publication",
-    "publisher": "Company",
-    "releaseDate": "2014-10-01",
-    "url": "https://publication.com",
-    "summary": "Description…"
-  }],
+  "volunteer": [],
+  "education": [
+    {
+      "institution": "Tecnológico Universitario Espíritu Santo",
+      "url": "https://academico.tes.edu.ec/",
+      "area": "Desarrollo de Software",
+      "studyType": "Tecnólogo",
+      "startDate": "2021-01-01",
+      "endDate": "2024-04-01",
+      "score": "",
+      "courses": []
+    }
+  ],
+  "awards": [],
+  "certificates": [],
+  "publications": [],
   "skills": [
     {
-      "name": "HTML",
-      "level": "Master",
-      "keywords": [
-        "Desarrollo Web", "Frontend"
-      ]
-    },
-    {
-      "name": "CSS",
-      "level": "Master",
-      "keywords": [
-        "Desarrollo Web", "Frontend", "Diseño Responsive"
-      ]
-    },
-    {
-      "name": "JavaScript",
-      "level": "Master",
-      "keywords": [
-        "Desarrollo Web", "Frontend", "Backend", "Fullstack"
-      ]
-    },
-    {
-      "name": "Tailwind",
+      "name": "Frontend",
       "level": "Avanzado",
       "keywords": [
-        "Desarrollo Web", "Frontend", "CSS Framework", "Diseño Responsive"
+        "Astro",
+        "SolidJS",
+        "React",
+        "Next.js",
+        "Tailwind CSS"
       ]
     },
     {
-      "name": "TypeScript",
+      "name": "Backend & APIs",
       "level": "Avanzado",
       "keywords": [
-        "Desarrollo Web", "Frontend", "Backend", "JavaScript Superset"
+        "Node.js",
+        "Bun",
+        "Elysia",
+        "PHP"
       ]
     },
     {
-      "name": "Node",
-      "level": "Avanzado",
+      "name": "Data & ORM",
+      "level": "Intermedio",
       "keywords": [
-        "Desarrollo Web", "Backend", "JavaScript", "Servidor"
+        "PostgreSQL",
+        "MySQL",
+        "Drizzle ORM",
+        "TanStack"
       ]
     },
     {
-      "name": "MySQL",
+      "name": "Core & Tools",
       "level": "Avanzado",
       "keywords": [
-        "Bases de Datos", "SQL", "Almacenamiento de Datos", "Backend"
-      ]
-    },
-    {
-      "name": "Git",
-      "level": "Avanzado",
-      "keywords": [
-        "Control de Versiones", "Colaboración", "Código Fuente"
-      ]
-    },
-    {
-      "name": "GitHub",
-      "level": "Avanzado",
-      "keywords": [
-        "Control de Versiones", "Colaboración", "Código Fuente", "Git"
-      ]
-    },
-    {
-      "name": "Next.js",
-      "level": "Avanzado",
-      "keywords": [
-        "Desarrollo Web", "Frontend", "React Framework", "SSR", "Static Generation"
-      ]
-    },
-    {
-      "name": "React",
-      "level": "Avanzado",
-      "keywords": [
-        "Desarrollo Web", "Frontend", "JavaScript Library", "UI"
-      ]
-    },
-    {
-      "name": "Php",
-      "level": "Avanzado",
-      "keywords": [
-        "Desarrollo Web", "Frontend", "Php Library", "UI"
-      ]
-    },
-    {
-      "name": "Python",
-      "level": "Avanzado",
-      "keywords": [
-        "Desarrollo Web", "Frontend", "Php Library", "UI"
+        "TypeScript",
+        "Python",
+        "Git",
+        "GitHub"
       ]
     }
   ],
   "languages": [
     {
       "language": "Spanish",
-      "fluency": "Native speaker"
+      "fluency": "Nativo"
     },
     {
       "language": "English",
-      "fluency": "Advanced"
+      "fluency": "Intermedio/Técnico"
     }
   ],
-  "interests": [{
-    "name": "Wildlife",
-    "keywords": [
-      "Ferrets",
-      "Unicorns"
-    ]
-  }],
-  "references": [{
-    "name": "Jane Doe",
-    "reference": "Reference…"
-  }],
+  "interests": [],
+  "references": [],
   "projects": [
     {
-      "name": "Docusmart",
-      "isActive": true,
-      "description": "Plataforma web integral para la gestión eficiente de documentos educativos, integrada con la API de Google Drive.",
-      "highlights": [
-        "Google Drive",
-        "Guardar archivos",
-        "Diseño amigable"
+      "name": "Aistermcon - ERP Corporativo e Infraestructura",
+      "isActive": false,
+      "description": "Sistema ERP integral con módulos de ventas, inventario, RRHH y control de accesos (RBAC). Construido en arquitectura monolítica y desplegado en servidor Ubuntu garantizando latencia cero y alta disponibilidad.",
+      "architecture_summary": "**Arquitectura y Lógica de Negocio:**\nDesarrollo de un sistema monolítico robusto utilizando PHP y JavaScript. El ERP centraliza la gestión operativa con módulos complejos: dashboard analítico, control de inventario, flujo de compras/ventas y recursos humanos (horarios de empleados). Se implementó un estricto Control de Acceso Basado en Roles (RBAC), cargas masivas de datos, pipelines para el envío automático de correos y motores de generación de reportes documentales en PDF y Excel.\n\n**Infraestructura y Toma de Decisiones Técnicas:**\nPara las operaciones críticas, la latencia de red y la dependencia de internet externo eran riesgos inasumibles. En lugar de un despliegue Cloud/PaaS, tomé la decisión arquitectónica de realizar un aprovisionamiento On-Premise (Bare-Metal) en un servidor físico local corriendo Ubuntu. Esto redujo a cero la latencia de la intranet para los operarios.\n\n**Administración Integral (IT Ops):**\nConfiguración y mantenimiento de todo el entorno de producción desde cero. Esto incluyó la administración del servidor web, configuración de firewalls de red local y la programación de scripts automatizados (cron jobs) para los respaldos diarios de la base de datos MySQL, asegurando la continuidad del negocio.",
+      "images": [
+        {
+          "src": "/projects/aistermcon-1.png",
+          "caption": "Inicio de sesion: credenciales de usuario"
+        },
+        {
+          "src": "/projects/aistermcon-2.png",
+          "caption": "Panel de control: resumen de sistema de gestion"
+        },
+        {
+          "src": "/projects/aistermcon-3.png",
+          "caption": "Inventario: gestion de productos y historial de movimentos"
+        },
+        {
+          "src": "/projects/aistermcon-4.png",
+          "caption": "Modal para creacion de nuevo producto"
+        },
+        {
+          "src": "/projects/aistermcon-5.png",
+          "caption": "Movimientos: salidas de productos por fecha, orden y cliente"
+        },
+        {
+          "src": "/projects/aistermcon-7.png",
+          "caption": "Formulario para registro de nuevas salidas"
+        },
+        {
+          "src": "/projects/aistermcon-8.png",
+          "caption": "Formulario para el registro de nuevas compras"
+        },
+        {
+          "src": "/projects/aistermcon-9.png",
+          "caption": "Horario: control de tiempo y gastos diarios por empleado"
+        },
+        {
+          "src": "/projects/aistermcon-6.png",
+          "caption": "Carga masiva de datos"
+        },
+        {
+          "src": "/projects/aistermcon-10.png",
+          "caption": "Formulario de configuracion para el envio automatico de correos"
+        }
       ],
-      "url": "https://mars.codes"
+      "highlights": [
+        "PHP",
+        "JavaScript",
+        "MySQL",
+        "Ubuntu server",
+        "Sysadmin"
+      ],
+      "url": "https://sistemaaistermcon.com/aistermcon/",
+      "github": "https://github.com/Jhonlz09/aistermcon"
     },
     {
-      "name": "Aistermcon",
+      "name": "Microservicio IA - Reconocimiento Facial",
       "isActive": true,
-      "description": "Solución completa con una variedad de funciones clave y eficientes para optimizar la administración del inventario",
-      "highlights": [
-        "Inventario",
-        "Emitir facturas",
-        "En desarrollo"
+      "description": "API REST independiente desarrollada en Python para validación biométrica en tiempo real. Arquitectura desacoplada diseñada para aislar cargas intensivas de Computer Vision y evitar bloqueos en las aplicaciones consumidoras.",
+      "architecture_summary": "**El Desafío (CPU-Bound vs I/O-Bound):**\nEl procesamiento de imágenes y la extracción de características faciales son tareas computacionalmente intensivas (CPU-bound). Si esta lógica se acoplara al backend principal (monolito en PHP o Node.js), bloquearía el hilo de ejecución (Event Loop), degradando severamente el rendimiento de toda la aplicación web para el resto de los usuarios.\n\n\n\n**Diseño Desacoplado y Stack Técnico:**\nPara resolver esto, extraje la lógica a un microservicio independiente. Elegí Python por su maduro y superior ecosistema para Machine Learning, procesamiento de tensores y Visión Computacional. El servicio recibe *payloads* con imágenes, extrae *embeddings* (vectores faciales) y realiza la comparación matemática para confirmar identidades de forma segura y con baja latencia.\n\n**Escalabilidad Elástica (Stateless):**\nAl estar diseñado como una API REST *stateless* (sin estado), la arquitectura permite un escalado horizontal elástico y granular. Esto significa que podemos levantar contenedores o instancias adicionales exclusivas para este microservicio de IA *únicamente* cuando haya picos de demanda de autenticación, optimizando dramáticamente los costos de infraestructura del negocio.",
+      "images": [
+        {
+          "src": "/projects/ia-1.webp",
+          "caption": "Pipeline de detección y autenticación facial"
+        },
+        {
+          "src": "/projects/ia-2.webp",
+          "caption": "Dashboard de resultados biométricos"
+        }
       ],
-      "url": "https://adventjs.dev"
+      "highlights": [
+        "Python",
+        "Microservicios",
+        "Computer Vision",
+        "APIs REST",
+        "Biometría"
+      ],
+      "github": "https://github.com/Jhonlz2011"
     },
     {
-      "name": "ShopZone",
+      "name": "Modern ERP - Alto Rendimiento",
       "isActive": true,
-      "description": "E-commerce que ofrece una experiencia de compra en línea fácil y segura.",
-      "highlights": [
-        "Explorar",
-        "Carro de compra",
-        "Gestionar Pedidos"
+      "description": "ERP de alto rendimiento con type-safety end-to-end. SolidJS (60fps en tablas densas) + Bun/Elysia (4x más rápido que Express).",
+      "architecture_summary": "Para este ERP, la prioridad fue el rendimiento extremo y la seguridad de tipos (type-safety) en todo el flujo de datos.\n\nBackend (Bun + Elysia): Se descartó la arquitectura tradicional de Node.js/Express en favor del runtime de Bun y el framework ElysiaJS. Esta decisión se basó en benchmarks internos donde Bun + Elysia procesaban peticiones hasta 4x más rápido, reduciendo significativamente la latencia en las consultas pesadas del ERP.\n\nFrontend (SolidJS): En lugar de React, se implementó SolidJS. Dado que un ERP maneja tableros de datos densos, la reactividad granular de Solid (sin Virtual DOM) garantizó 60fps constantes en la UI, incluso al renderizar tablas con miles de registros.\n\nBase de Datos (Drizzle ORM + PostgreSQL): Se eligió PostgreSQL por su robustez relacional y Drizzle ORM por ofrecer tipado estricto de extremo a extremo (End-to-End Type Safety), eliminando errores de discrepancia de datos entre la base y el cliente.",
+      "images": [
+        {
+          "src": "/projects/erp-1.png",
+          "caption": "Vista de gestión de proveedores con filtros avanzados"
+        },
+        {
+          "src": "/projects/erp-2.webp",
+          "caption": "Tablero de datos con reactividad SolidJS a 60fps"
+        }
       ],
-      "url": "https://codember.dev"
+      "highlights": [
+        "SolidJS",
+        "Bun",
+        "Elysia",
+        "Drizzle",
+        "PostgreSQL"
+      ],
+      "url": "https://jhonlz.online/",
+      "github": "https://github.com/Jhonlz09/app-sri"
+    },
+    {
+      "name": "Facturación Electrónica SRI (Ecuador)",
+      "isActive": false,
+      "description": "Orquestador de comprobantes electrónicos (Facturas, Guías, Retenciones) que implementa algoritmos tributarios (Módulo 11) y firma electrónica en formato XAdES-BES. Cuenta con una máquina de estados para autorización asíncrona (SOAP) y tolerancia a fallos de red contra los Web Services del SRI.",
+      "architecture_summary": "**El Desafío (Criptografía y Orquestación de Esquemas XML):**\nLa emisión de comprobantes electrónicos para el SRI exige el cumplimiento de estrictos esquemas XSD, el cálculo matemático del dígito verificador (Algoritmo Módulo 11) y procesos de firma electrónica criptográfica (XAdES-BES) leyendo contenedores PKCS#12. Implementar esta lógica de negocio tributaria presenta un desafío arquitectónico sustancial: acoplar estas operaciones complejas en la capa visual puede aumentar la deuda técnica y hacer vulnerable la integración con los Web Services (SOAP) del SRI frente a actualizaciones normativas.\n\n**Diseño SPA Monolítico y Stack Frontend:**\nLa arquitectura se estructura como una Single-Page Application (SPA) altamente optimizada, impulsada por React 19 y empaquetada con Vite para garantizar tiempos de compilación y Hot Module Replacement (HMR) ultrarrápidos. A nivel de UI, utiliza Tailwind CSS v4 para un sistema de diseño utilitario, modular y responsivo, complementado con iconografía SVG vectorial (Lucide-React). Toda la capa de presentación y la máquina de estados del flujo de emisión (Borrador -> Firmado -> Enviado -> Autorizado) se consolidan eficientemente en el componente orquestador.\n\n**Client-Side Processing y Camino a la Escalabilidad:**\nLa aplicación implementa un patrón de procesamiento en el cliente (Client-Side Processing), trasladando la carga computacional de la generación dinámica de las estructuras XML tributarias (Facturas, Guías de Remisión, Notas de Crédito, Retenciones) directamente al navegador del usuario. Este enfoque elimina la latencia de red durante la fase de validación en tiempo real. Aunque actualmente opera como un MVP Monolítico en el Frontend (simulando la firma y la comunicación asíncrona), esta arquitectura está perfectamente preparada para evolucionar hacia un modelo desacoplado. En el futuro, el motor de UI enviará *payloads* ligeros a un microservicio Backend *stateless* dedicado exclusivamente a la inyección de la firma XAdES-BES y la comunicación segura SOAP con los servidores del SRI, garantizando cumplimiento, seguridad y escalabilidad elástica en producción.",
+      "images": [
+        {
+          "src": "/projects/sri-1.png",
+          "caption": "Interfaz principal"
+        },
+        {
+          "src": "/projects/sri-2.png",
+          "caption": "Proceso de generacion XML ante el SRI"
+        },
+        {
+          "src": "/projects/sri-3.png",
+          "caption": "Proceso de firma y envio ante el SRI"
+        },
+        {
+          "src": "/projects/sri-4.png",
+          "caption": "Proceso de autorización ante el SRI"
+        }
+      ],
+      "highlights": [
+        "React",
+        "Tailwind CSS v4",
+        "XAdES-BES",
+        "Soap API",
+        "SRI Web Services"
+      ],
+      "url": "",
+      "github": "https://github.com/Jhonlz2011"
     }
   ]
 }

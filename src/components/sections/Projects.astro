@@ -1,21 +1,39 @@
 ---
-import GitHub from "@/icons/GitHub.astro"
-import Section from "../Section.astro"
+import GitHub from "@/icons/GitHub.astro";
+import Section from "../Section.astro";
 
-import { projects } from "@cv"
+import { projects } from "@cv";
+const { class: className } = Astro.props;
 ---
 
-<Section title="Proyectos">
+<Section
+  title="Proyectos Destacados"
+  class={`projects-section ${className || ""}`}
+>
   <ul>
     {
       projects.map(
-        ({ url, description, highlights, name, isActive }) => {
+        ({
+          url,
+          description,
+          highlights,
+          name,
+          isActive,
+          github,
+          architecture_summary,
+          images,
+        }) => {
+          const modalId = `modal-${name.replace(/[^a-zA-Z0-9-]/g, "").toLowerCase()}`;
           return (
             <li>
               <article>
                 <header>
                   <h3>
-                    <a href={url} target="_blank" title={`Ver el proyecto ${name}`}>
+                    <a
+                      href={url || github || "#"}
+                      target="_blank"
+                      title={`Ver el proyecto ${name}`}
+                    >
                       {name}
                     </a>
                     {isActive && <span>•</span>}
@@ -24,56 +42,266 @@ import { projects } from "@cv"
                 </header>
                 <footer>
                   {highlights.map((highlight) => {
-                    return <span>{highlight}</span>
+                    return <span>{highlight}</span>;
                   })}
                 </footer>
+
+                <div class="card-actions no-print">
+                  {(url || github) && (
+                    <a
+                      href={url || github || "#"}
+                      target="_blank"
+                      class="cta demo-cta"
+                    >
+                      🔗 Ver Proyecto
+                    </a>
+                  )}
+                  {architecture_summary && (
+                    <button class="cta arch-cta" data-modal={modalId}>
+                      📂 Arquitectura & Caso de Estudio
+                    </button>
+                  )}
+                </div>
               </article>
+
+              {architecture_summary && (
+                <dialog id={modalId} class="arch-modal">
+                  <div class="modal-content">
+                    <header class="modal-header">
+                      <div class="modal-title-row">
+                        <h3>{name}</h3>
+                        <span class={`status-badge ${isActive ? 'status-active' : 'status-done'}`}>
+                          {isActive ? (
+                            <><span class="status-dot"></span> En Desarrollo</>
+                          ) : (
+                            <><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg> Finalizado</>
+                          )}
+                        </span>
+                      </div>
+                      <button
+                        class="close-modal"
+                        data-close={modalId}
+                        title="Cerrar modal"
+                      >
+                        ✕
+                      </button>
+                    </header>
+
+                    <div class="modal-body">
+                      <div class="modal-media">
+                        {images && images.length > 0 && (
+                          <div class="carousel-wrapper">
+                            <div class="carousel" data-carousel={modalId}>
+                              {images.map((img) => (
+                                <figure class="carousel-slide">
+                                  <img
+                                    src={img.src}
+                                    alt={`Screenshot de ${name}`}
+                                    loading="lazy"
+                                  />
+                                  <figcaption>{img.caption}</figcaption>
+                                </figure>
+                              ))}
+                            </div>
+                            {images.length > 1 && (
+                              <div class="carousel-controls">
+                                <button
+                                  class="nav-btn prev-btn"
+                                  data-dir="prev"
+                                  data-carousel-target={modalId}
+                                  aria-label="Anterior"
+                                >
+                                  ‹
+                                </button>
+                                <div class="dots" data-dots={modalId}>
+                                  {images.map((_, i) => (
+                                    <span
+                                      class={`dot ${i === 0 ? "active" : ""}`}
+                                      data-index={i}
+                                    />
+                                  ))}
+                                </div>
+                                <button
+                                  class="nav-btn next-btn"
+                                  data-dir="next"
+                                  data-carousel-target={modalId}
+                                  aria-label="Siguiente"
+                                >
+                                  ›
+                                </button>
+                              </div>
+                            )}
+                          </div>
+                        )}
+                      </div>
+
+                      <div class="modal-text">
+                        <h4>Decisiones de Arquitectura</h4>
+                        {architecture_summary.split("\n\n").map((paragraph) => (
+                          <p
+                            set:html={paragraph.replace(
+                              /\*\*(.*?)\*\*/g,
+                              "<strong>$1</strong>",
+                            )}
+                          />
+                        ))}
+                      </div>
+                    </div>
+
+                    {(url || github) && (
+                      <footer class="modal-footer">
+                        {url && (
+                          <a
+                            href={url}
+                            target="_blank"
+                            class="modal-link primary-link"
+                          >
+                            🔗 Ver Demo Live
+                          </a>
+                        )}
+                        {github && (
+                          <a href={github} target="_blank" class="modal-link">
+                            📂 GitHub
+                          </a>
+                        )}
+                      </footer>
+                    )}
+                  </div>
+                </dialog>
+              )}
             </li>
-          )
-        }
+          );
+        },
       )
     }
   </ul>
 </Section>
 
+<script>
+  const openButtons = document.querySelectorAll(".arch-cta");
+  const closeButtons = document.querySelectorAll(".close-modal");
+  const modals = document.querySelectorAll(".arch-modal");
+
+  openButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const modalId = btn.getAttribute("data-modal");
+      const modal = document.getElementById(modalId || "") as HTMLDialogElement;
+      if (modal) {
+        modal.showModal();
+        document.body.style.overflow = "hidden";
+      }
+    });
+  });
+
+  const closeModal = (modal: HTMLDialogElement) => {
+    modal.close();
+    document.body.style.overflow = "";
+  };
+
+  closeButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const modalId = btn.getAttribute("data-close");
+      const modal = document.getElementById(modalId || "") as HTMLDialogElement;
+      if (modal) closeModal(modal);
+    });
+  });
+
+  modals.forEach((modal: any) => {
+    modal.addEventListener("click", (e: MouseEvent) => {
+      if (e.target === modal) closeModal(modal);
+    });
+  });
+
+  // Carousel Navigation
+  document.querySelectorAll(".nav-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const targetId = btn.getAttribute("data-carousel-target");
+      const dir = btn.getAttribute("data-dir");
+      const carousel = document.querySelector(
+        `[data-carousel="${targetId}"]`,
+      ) as HTMLElement;
+      if (!carousel) return;
+
+      const slides = carousel.querySelectorAll(".carousel-slide");
+      const scrollAmount = slides[0]?.clientWidth || 300;
+      carousel.scrollBy({
+        left: dir === "next" ? scrollAmount : -scrollAmount,
+        behavior: "smooth",
+      });
+    });
+  });
+
+  // Dot Indicators via IntersectionObserver
+  document.querySelectorAll(".carousel").forEach((carousel) => {
+    const modalId = carousel.getAttribute("data-carousel");
+    const dotsContainer = document.querySelector(`[data-dots="${modalId}"]`);
+    if (!dotsContainer) return;
+    const dots = dotsContainer.querySelectorAll(".dot");
+    const slides = carousel.querySelectorAll(".carousel-slide");
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const idx = Array.from(slides).indexOf(entry.target as HTMLElement);
+            dots.forEach((d, i) => d.classList.toggle("active", i === idx));
+          }
+        });
+      },
+      { root: carousel, threshold: 0.6 },
+    );
+
+    slides.forEach((slide) => observer.observe(slide));
+  });
+</script>
+
 <style>
   ul {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1rem;
-    margin-inline: -16px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--sp-4);
   }
 
   article {
-    border-radius: 8px;
-    border: 1px solid #f2f2f2;
-    gap: 16px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-subtle);
+    background: var(--bg-elevated);
     display: flex;
     flex-direction: column;
-    padding: 16px;
+    padding: var(--sp-6);
     height: 100%;
+    transition: border-color var(--duration-normal) var(--ease-out);
+  }
+
+  article:hover {
+    border-color: var(--border-default);
   }
 
   article header {
     flex: 1;
+    margin-bottom: var(--sp-4);
   }
 
   article h3 {
-    margin-bottom: 4px;
+    margin-bottom: var(--sp-2);
+    font-size: var(--fs-lg);
+    font-weight: 600;
   }
 
   article a {
-    color: #111;
+    color: var(--text-primary);
   }
 
   article a:hover {
     text-decoration: underline;
+    color: var(--accent-glow);
   }
 
   article p {
-    font-size: 0.75rem;
-    line-height: 1.2rem;
-    margin-bottom: 4px;
+    font-size: var(--fs-sm);
+    line-height: 1.5;
+    margin-bottom: var(--sp-1);
+    color: var(--text-secondary);
   }
 
   article h3 span {
@@ -87,17 +315,18 @@ import { projects } from "@cv"
   footer {
     display: flex;
     flex-wrap: wrap;
-    gap: 4px;
-    font-size: 0.6rem;
+    gap: var(--sp-2);
+    font-size: var(--fs-xs);
   }
 
   footer span {
     border-radius: 6px;
-    background: #eee;
-    color: #444;
-    font-size: 0.6rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-muted);
+    font-size: 0.65rem;
     font-weight: 500;
-    padding: 0.2rem 0.6rem;
+    padding: 0.3rem 0.6rem;
   }
 
   .github-code-link {
@@ -116,21 +345,410 @@ import { projects } from "@cv"
     }
   }
 
+  /* --- Nuevos Estilos CTA y Modal --- */
+  .card-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 1.25rem;
+  }
+
+  .cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.6rem 1rem;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    border: none;
+    font-family: inherit;
+  }
+
+  .demo-cta {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-primary);
+    border: 1px solid transparent;
+  }
+
+  .demo-cta:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .arch-cta {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: var(--text-primary);
+  }
+
+  .arch-cta:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+
+  /* ─── Modal ─── */
+  .arch-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 92%;
+    max-width: 960px;
+    max-height: 85vh;
+    padding: 0;
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    background: var(--bg-card);
+    color: var(--text-primary);
+    box-shadow: 0 25px 60px -12px rgba(0, 0, 0, 0.8);
+    margin: 0;
+    overflow: hidden;
+  }
+
+  .arch-modal::backdrop {
+    background: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  .modal-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    max-height: 85vh;
+  }
+
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--sp-4) var(--sp-6);
+    border-bottom: 1px solid var(--border-subtle);
+    flex-shrink: 0;
+    gap: var(--sp-3);
+  }
+
+  .modal-title-row {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-3);
+    flex-wrap: wrap;
+  }
+
+  .modal-header h3 {
+    margin: 0;
+    font-size: var(--fs-xl);
+    font-weight: 600;
+  }
+
+  /* ─── Status Badge ─── */
+  .status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    border-radius: var(--radius-full);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .status-active {
+    background: rgba(16, 185, 129, 0.1);
+    color: #10b981;
+    border: 1px solid rgba(16, 185, 129, 0.25);
+  }
+
+  .status-done {
+    background: rgba(139, 92, 246, 0.1);
+    color: var(--accent);
+    border: 1px solid rgba(139, 92, 246, 0.25);
+  }
+
+  .status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #10b981;
+    box-shadow: 0 0 6px #10b981;
+    animation: pulse-dot 2s infinite;
+    flex-shrink: 0;
+  }
+
+  @keyframes pulse-dot {
+    0%   { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+    70%  { box-shadow: 0 0 0 5px rgba(16, 185, 129, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+  }
+
+  .close-modal {
+    background: transparent;
+    border: none;
+    color: var(--text-tertiary);
+    font-size: 1.4rem;
+    cursor: pointer;
+    padding: var(--sp-1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-sm);
+    transition:
+      color var(--duration-fast),
+      background var(--duration-fast);
+  }
+
+  .close-modal:hover {
+    color: var(--text-primary);
+    background: var(--bg-elevated);
+  }
+
+  /* ─── Split Panel Body ─── */
+  .modal-body {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .modal-media {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: var(--sp-6);
+    border-right: 1px solid var(--border-subtle);
+    background: var(--bg-base);
+    overflow: hidden;
+  }
+
+  .carousel-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-2);
+    width: 100%;
+    align-items: center;
+  }
+
+  .carousel {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: var(--sp-3);
+    width: 100%;
+    scrollbar-width: none;
+  }
+
+  .carousel::-webkit-scrollbar {
+    display: none;
+  }
+
+  .carousel img {
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-subtle);
+    object-fit: contain;
+    max-height: 360px;
+    width: 100%;
+    background: #ffffff;
+  }
+
+  .carousel-slide {
+    flex: 0 0 100%;
+    scroll-snap-align: center;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-2);
+  }
+
+  .carousel-slide figcaption {
+    font-size: var(--fs-xs);
+    color: var(--text-tertiary);
+    text-align: center;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+  }
+
+  .carousel-controls {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-4);
+  }
+
+  .nav-btn {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-default);
+    color: var(--text-primary);
+    width: 32px;
+    height: 32px;
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.2rem;
+    line-height: 1;
+    transition: all var(--duration-fast) var(--ease-out);
+  }
+
+  .nav-btn:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: var(--border-hover);
+  }
+
+  .dots {
+    display: flex;
+    gap: var(--sp-2);
+  }
+
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: var(--radius-full);
+    background: var(--border-default);
+    transition: background var(--duration-fast);
+  }
+
+  .dot.active {
+    background: var(--text-primary);
+  }
+
+  /* ─── Text Panel ─── */
+  .modal-text {
+    padding: var(--sp-6);
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-4);
+  }
+
+  .modal-text h4 {
+    font-size: var(--fs-sm);
+    font-weight: 600;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0;
+  }
+
+  .modal-text p {
+    font-size: var(--fs-sm);
+    line-height: 1.7;
+    color: var(--text-secondary);
+    text-wrap: pretty;
+    margin: 0;
+  }
+
+  /* ─── Modal Footer ─── */
+  .modal-footer {
+    display: flex;
+    gap: var(--sp-3);
+    padding: var(--sp-4) var(--sp-6);
+    border-top: 1px solid var(--border-subtle);
+    flex-shrink: 0;
+  }
+
+  .modal-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-2);
+    padding: var(--sp-2) var(--sp-4);
+    border-radius: var(--radius-sm);
+    font-size: var(--fs-sm);
+    font-weight: 500;
+    text-decoration: none;
+    color: var(--text-primary);
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-default);
+    transition: all var(--duration-fast) var(--ease-out);
+  }
+
+  .modal-link:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: var(--border-hover);
+  }
+
+  .primary-link {
+    background: var(--accent-subtle);
+    border-color: var(--accent);
+    color: var(--text-primary);
+  }
+
+  .primary-link:hover {
+    background: rgba(139, 92, 246, 0.2);
+  }
+
   @media (width <= 700px) {
     ul {
-      margin-inline: 0px;
+      grid-template-columns: 1fr;
     }
 
-    article {
-      border: none;
-      box-shadow: 0 1px 1px #f2f2f2;
-      padding: 0 0 16px 0;
+    .arch-modal {
+      width: 95%;
+      max-height: 92vh;
+    }
+
+    .modal-content {
+      max-height: 92vh;
+      overflow-y: auto;
+    }
+
+    .modal-body {
+      grid-template-columns: 1fr;
+      overflow: visible;
+    }
+
+    .modal-media {
+      border-right: none;
+      border-bottom: 1px solid var(--border-subtle);
+      padding: var(--sp-2);
+      flex-shrink: 0;
+      overflow: visible;
+    }
+
+    .carousel img {
+      max-height: none;
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
+
+    .modal-text {
+      padding: var(--sp-4);
+    }
+
+    .modal-footer {
+      padding: var(--sp-3) var(--sp-4);
     }
   }
 
   @media print {
     article h3 span {
       animation-name: none;
+      color: #000;
+      display: none;
+    }
+
+    ul {
+      display: block; /* Remove grid for print to prevent awkward page breaks */
+    }
+
+    article {
+      page-break-inside: avoid;
+      break-inside: avoid;
+      margin-bottom: 1.5rem;
+    }
+
+    footer span {
+      background: transparent !important;
+      border: 1px solid #ccc !important;
+      color: #000 !important;
     }
   }
 </style>

@@ -1,29 +1,46 @@
 ---
 // se ejecuta en el servidor o en build time <----
-const { title } = Astro.props;
+const { title, class: className } = Astro.props;
 ---
 
-<section>
-  {title && <h2 style="display:flex;align-items:center;gap:4px">{title}</h2>}
+<section class={className}>
+  {title && <h2>{title}</h2>}
   <slot />
 </section>
 
 <style>
   section {
-    max-width: 700px;
-    margin: 0 auto 40px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: var(--sp-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-6);
+    position: relative;
+    overflow: hidden;
+    transition: border-color var(--duration-normal) var(--ease-out);
+  }
+
+  section:hover {
+    border-color: var(--border-default);
   }
 
   h2 {
-    margin-bottom: 8px;
+    margin: 0;
     font-weight: 700;
-    line-height: 1.5;
-    font-size: 1.5rem;
+    line-height: 1.2;
+    font-size: var(--fs-2xl);
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2);
   }
 
-  @media (width <= 700px) {
+  @media (max-width: 700px) {
     section {
-      margin-bottom: 38px;
+      padding: var(--sp-4);
+      border-radius: var(--radius-md);
     }
   }
 </style>
