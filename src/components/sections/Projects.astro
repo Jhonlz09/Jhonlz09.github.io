@@ -22,6 +22,7 @@ const { class: className } = Astro.props;
           github,
           architecture_summary,
           images,
+          demo_credentials,
         }) => {
           const modalId = `modal-${name.replace(/[^a-zA-Z0-9-]/g, "").toLowerCase()}`;
           return (
@@ -55,6 +56,12 @@ const { class: className } = Astro.props;
                     >
                       🔗 Ver Proyecto
                     </a>
+                  )}
+                  {demo_credentials && (
+                    <div class="demo-creds-box">
+                      <span class="creds-label">🔑 Demo:</span>
+                      <span class="creds-value">Usr: <strong>{demo_credentials.user}</strong> | Pass: <strong>{demo_credentials.password}</strong></span>
+                    </div>
                   )}
                   {architecture_summary && (
                     <button class="cta arch-cta" data-modal={modalId}>
@@ -136,6 +143,12 @@ const { class: className } = Astro.props;
                       </div>
 
                       <div class="modal-text">
+                        {demo_credentials && (
+                          <div class="demo-creds-box modal-creds">
+                            <span class="creds-label">🔑 Demo Access:</span>
+                            <span class="creds-value">Usuario: <strong>{demo_credentials.user}</strong> | Contraseña: <strong>{demo_credentials.password}</strong></span>
+                          </div>
+                        )}
                         <h4>Decisiones de Arquitectura</h4>
                         {architecture_summary.split("\n\n").map((paragraph) => (
                           <p
@@ -387,6 +400,37 @@ const { class: className } = Astro.props;
   .arch-cta:hover {
     background: rgba(255, 255, 255, 0.05);
     border-color: rgba(255, 255, 255, 0.3);
+  }
+
+  /* ─── Credentials Box ─── */
+  .demo-creds-box {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    padding: 0.5rem 0.75rem;
+    background: rgba(139, 92, 246, 0.1);
+    border: 1px solid rgba(139, 92, 246, 0.2);
+    border-radius: 6px;
+    color: var(--text-secondary);
+  }
+
+  .demo-creds-box.modal-creds {
+    margin-bottom: 1rem;
+    background: rgba(16, 185, 129, 0.1);
+    border-color: rgba(16, 185, 129, 0.2);
+  }
+
+  .demo-creds-box strong {
+    color: var(--text-primary);
+    font-family: monospace;
+    font-size: 0.8rem;
+  }
+
+  .creds-label {
+    color: var(--text-primary);
+    font-weight: 600;
   }
 
   /* ─── Modal ─── */
