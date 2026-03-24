@@ -54,6 +54,16 @@
       "endDate": "2024-04-01",
       "score": "",
       "courses": []
+    },
+    {
+      "institution": "Linguaskill English Test - CEFR Level B2",
+      "url": "",
+      "area": "Idioma",
+      "studyType": "B2",
+      "startDate": "2024-04-05",
+      "endDate": "",
+      "score": "",
+      "courses": []
     }
   ],
   "awards": [],
@@ -78,7 +88,9 @@
         "Node.js",
         "Bun",
         "Elysia",
-        "PHP"
+        "PHP",
+        "Redis",
+        "Docker"
       ]
     },
     {
@@ -204,12 +216,37 @@
       "images": [
         {
           "src": "/projects/erp-1.png",
-          "caption": "Vista de gestión de proveedores con filtros avanzados"
+          "caption": "Inicio de sesion"
         },
         {
-          "src": "/projects/erp-2.webp",
-          "caption": "Tablero de datos con reactividad SolidJS a 60fps"
+          "src": "/projects/erp-2.png",
+          "caption": "Pagina de proveedores"
+        },
+        {
+          "src": "/projects/erp-3.png",
+          "caption": "Fomulario de proveedores: integracion con SRI consulta por RUC y geonames api externas"
+        },
+        {
+          "src": "/projects/erp-4.png",
+          "caption": "Pagina de usuarios, roles y permisos" 
+        },
+        {
+          "src": "/projects/erp-5.png",
+          "caption": "Formulario de usuarios" 
+        },
+        {
+          "src": "/projects/erp-6.png",
+          "caption": "Vista para detalles, sesiones y actividad por usuario" 
+        },
+        {
+          "src": "/projects/erp-7.png",
+          "caption": "Pagina de perfil" 
+        },
+        {
+          "src": "/projects/erp-8.png",
+          "caption": "Gestion de sesiones para la cuenta de usuario" 
         }
+
       ],
       "highlights": [
         "SolidJS & TanStack",
