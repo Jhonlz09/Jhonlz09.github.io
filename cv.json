@@ -181,11 +181,11 @@
         "Ubuntu server",
         "Sysadmin"
       ],
-      "url": "https://sistemaaistermcon.com/aistermcon/",
+      "url": "https://sistemaaistermcon.com",
       "github": "https://github.com/Jhonlz09/aistermcon"
     },
     {
-      "name": "Microservicio IA - Reconocimiento Facial",
+      "name": "Microservicio - Reconocimiento Facial",
       "isActive": true,
       "description": "API REST independiente desarrollada en Python para validación biométrica en tiempo real. Arquitectura desacoplada diseñada para aislar cargas intensivas de Computer Vision y evitar bloqueos en las aplicaciones consumidoras.",
       "architecture_summary": "**El Desafío (CPU-Bound vs I/O-Bound):**\nEl procesamiento de imágenes y la extracción de características faciales son tareas computacionalmente intensivas. Si esta lógica se acoplara al backend principal, bloquearía el hilo de ejecución (Event Loop), degradando severamente el rendimiento de toda la aplicación web para el resto de los usuarios.\n\n\n\n**Diseño Desacoplado y Stack Técnico:**\nPara resolver esto, extraje la lógica a un microservicio independiente. Elegí Python por su maduro y superior ecosistema para Machine Learning, procesamiento de tensores y Visión Computacional. El servicio recibe *payloads* con imágenes, extrae *embeddings* (vectores faciales) y realiza la comparación matemática para confirmar identidades de forma segura y con baja latencia.\n\n**Escalabilidad Elástica (Stateless):**\nAl estar diseñado como una API REST *stateless* (sin estado), la arquitectura permite un escalado horizontal elástico y granular. Esto significa que podemos levantar contenedores o instancias adicionales exclusivas para este microservicio de IA, optimizando dramáticamente los costos de infraestructura del negocio.",
