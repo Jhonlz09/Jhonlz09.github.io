@@ -48,7 +48,7 @@ const { class: className } = Astro.props;
                     </h3>
                     <span class={`status-pill ${isActive ? "status-active" : "status-completed"}`}>
                       <span class="status-indicator"></span>
-                      {isActive ? "En Producción" : "Finalizado"}
+                      {isActive ? "En Desarrollo" : "Finalizado"}
                     </span>
                   </div>
                   <p class="description">{description}</p>
@@ -106,7 +106,7 @@ const { class: className } = Astro.props;
                         <h3>{name}</h3>
                         <span class={`status-pill ${isActive ? "status-active" : "status-completed"}`}>
                           <span class="status-indicator"></span>
-                          {isActive ? "En Producción" : "Finalizado"}
+                          {isActive ? "En Desarrollo" : "Finalizado"}
                         </span>
                       </div>
                       <button
