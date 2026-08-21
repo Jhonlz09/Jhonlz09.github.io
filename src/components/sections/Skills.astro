@@ -1,44 +1,49 @@
 ---
 import Section from "../Section.astro"
-import HTML from "@/icons/html.astro"
-import CSS from "@/icons/css.astro"
-import JavaScript from "@/icons/javascript.astro"
-import TypeScript from "@/icons/type.astro"
+import AstroIcon from "@/icons/AstroIcon.astro"
+import SolidJS from "@/icons/SolidJS.astro"
 import React from "@/icons/react.astro"
+import Next from "@/icons/next.astro"
+import Tailwind from "@/icons/tailwind.astro"
 import Node from "@/icons/node.astro"
+import Bun from "@/icons/Bun.astro"
+import Elysia from "@/icons/Elysia.astro"
+import Php from "@/icons/php.astro"
+import Redis from "@/icons/Redis.astro"
+import PostgreSQL from "@/icons/PostgreSQL.astro"
 import MySQL from "@/icons/sql.astro"
+import Drizzle from "@/icons/Drizzle.astro"
+import TanStack from "@/icons/TanStack.astro"
+import TypeScript from "@/icons/type.astro"
+import Python from "@/icons/python.astro"
 import Git from "@/icons/git.astro"
 import GitHub from "@/icons/GitHub.astro"
-import Tailwind from "@/icons/tailwind.astro"
-import Next from "@/icons/next.astro"
+import Docker from "@/icons/Docker.astro"
+
 import { skills } from "@cv"
-import Swift from "@/icons/swift.astro"
-import SwiftUI from "@/icons/swiftui.astro"
-import Kotlin from "@/icons/kotlin.astro"
-import Flutter from "@/icons/flutter.astro"
-import Php from "@/icons/php.astro"
-import Python from "@/icons/python.astro"
 
-
-const SKILLS_ICONS: Record<string, any> = {
-  HTML,
-  CSS,
-  JavaScript,
-  TypeScript,
+const SKILLS_ICONS: Record<string, (_props: Record<string, unknown>) => unknown> = {
+  Astro: AstroIcon,
+  SolidJS,
   React,
-  Node,
+  "Next.js": Next,
+  "Tailwind CSS": Tailwind,
+  "Node.js": Node,
+  Bun,
+  Elysia,
+  PHP: Php,
+  Redis,
+  PostgreSQL,
   MySQL,
+  "Drizzle ORM": Drizzle,
+  TanStack,
+  TypeScript,
+  Python,
   Git,
   GitHub,
-  Next,
-  Tailwind,
-  Swift,
-  SwiftUI,
-  Kotlin,
-  Flutter,
-  Php,
-  Python
+  Docker
 }
+
 const { class: className } = Astro.props;
 ---
 
@@ -48,14 +53,14 @@ const { class: className } = Astro.props;
       skills.map(({ name, keywords }) => (
         <div class="skill-group">
           <h3>{name}</h3>
-          <ul>
+          <ul class="keywords-list">
             {keywords.map((keyword) => {
-              const iconName = keyword === "Next.js" ? "Next" : keyword === "Tailwind CSS" ? "Tailwind" : keyword === "Node.js" ? "Node" : keyword
-              const Icon = SKILLS_ICONS[iconName]
-      
+              const Icon = SKILLS_ICONS[keyword]
+
               return (
-                <li>
-                  {Icon && <Icon />} <span>{keyword}</span>
+                <li class="skill-tag">
+                  {Icon && <Icon />}
+                  <span>{keyword}</span>
                 </li>
               )
             })}
@@ -70,45 +75,65 @@ const { class: className } = Astro.props;
   .skills-container {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: var(--sp-4);
+  }
+
+  .skill-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-2);
   }
 
   .skill-group h3 {
     font-size: var(--fs-xs);
     color: var(--text-tertiary);
-    margin-bottom: var(--sp-3);
     text-transform: uppercase;
     letter-spacing: 0.05em;
     font-weight: 600;
   }
-  ul {
-    display: inline-flex;
+
+  .keywords-list {
+    display: flex;
     gap: var(--sp-2);
     flex-wrap: wrap;
   }
 
-  li {
+  .skill-tag {
     align-items: center;
     background: var(--bg-elevated);
     border: 1px solid var(--border-subtle);
     border-radius: var(--radius-sm);
     color: var(--text-primary);
-    display: flex;
-    font-size: var(--fs-sm);
+    display: inline-flex;
+    font-size: var(--fs-xs);
     font-weight: 500;
     gap: var(--sp-2);
-    padding: var(--sp-1) var(--sp-3);
+    padding: 6px 10px;
+    transition: border-color var(--duration-fast) var(--ease-out);
+  }
+
+  .skill-tag:hover {
+    border-color: var(--border-default);
+  }
+
+  .skill-tag :global(svg) {
+    width: 14px;
+    height: 14px;
+    color: var(--text-secondary);
+    flex-shrink: 0;
   }
 
   @media print {
-    li {
+    .skill-tag {
       background: transparent !important;
-      border: 1px solid #ccc !important;
+      border: 1px solid #e4e4e7 !important;
       color: #000 !important;
-      page-break-inside: avoid;
+    }
+    .skill-tag :global(svg) {
+      color: #000 !important;
     }
     .skill-group h3 {
-      color: #000 !important;
+      color: #52525b !important;
     }
   }
 </style>

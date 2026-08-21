@@ -8,10 +8,10 @@ import Skills from "@/components/sections/Skills.astro";
 import DownloadPDF from "@/components/DownloadPDF.astro";
 
 import { basics } from "@cv";
-const { name } = basics;
+const { name, label, location } = basics;
 ---
 
-<Layout title={`${name} · Full-Stack Developer | Guayaquil, Ecuador`}>
+<Layout title={`${name} · ${label} | ${location.city}, ${location.region}`}>
   <main>
     <Hero class="bento-hero" />
     <Experience class="bento-experience" />
@@ -25,27 +25,26 @@ const { name } = basics;
 
 <style>
   main {
-    padding: var(--sp-8);
-    margin: auto;
+    padding: var(--sp-8) var(--sp-4);
+    margin: 0 auto;
     width: 100%;
-    max-width: 1200px;
+    max-width: 1000px;
     display: grid;
     grid-template-columns: repeat(6, 1fr);
-    grid-auto-rows: minmax(min-content, max-content);
-    gap: var(--sp-3);
+    gap: var(--sp-4);
   }
 
-  @media (max-width: 1024px) {
+  @media (max-width: 900px) {
     main {
-      grid-template-columns: repeat(4, 1fr);
-      padding: var(--sp-6);
+      grid-template-columns: 1fr;
+      padding: var(--sp-6) var(--sp-4);
+      gap: var(--sp-4);
     }
   }
 
-  @media (max-width: 700px) {
+  @media (max-width: 600px) {
     main {
-      grid-template-columns: 1fr;
-      padding: var(--sp-4);
+      padding: var(--sp-4) var(--sp-3);
       gap: var(--sp-3);
     }
   }
@@ -58,19 +57,13 @@ const { name } = basics;
   .bento-skills { grid-column: span 3; }
   .bento-education { grid-column: span 3; }
 
-  @media (max-width: 1024px) {
-    .bento-hero { grid-column: span 4; }
-    .bento-experience { grid-column: span 4; }
-    .bento-projects { grid-column: span 4; }
-    .bento-skills { grid-column: span 2; }
-    .bento-education { grid-column: span 2; }
-  }
-
-  @media (max-width: 700px) {
-    .bento-hero { grid-column: span 1; }
-    .bento-experience { grid-column: span 1; }
-    .bento-projects { grid-column: span 1; }
-    .bento-skills { grid-column: span 1; }
-    .bento-education { grid-column: span 1; }
+  @media (max-width: 900px) {
+    .bento-hero,
+    .bento-experience,
+    .bento-projects,
+    .bento-skills,
+    .bento-education {
+      grid-column: span 1;
+    }
   }
 </style>

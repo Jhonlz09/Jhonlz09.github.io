@@ -1,33 +1,30 @@
 ---
 import Section from "../Section.astro"
-
 import { education } from "@cv"
+
 const { class: className } = Astro.props;
 ---
 
-<Section title="Educación" class={`education-section ${className || ''}`}>
-  <ul>
+<Section title="Educación & Certificaciones" class={`education-section ${className || ''}`}>
+  <ul class="edu-list">
     {
       education.map(({ institution, startDate, endDate, area, studyType }) => {
         const startYear = new Date(startDate).getFullYear()
         const endYear =
-          endDate != null ? new Date(endDate).getFullYear() : "Actual"
-        const years = `${startYear} - ${endYear}`
+          endDate && endDate !== "null" ? new Date(endDate).getFullYear() : "Presente"
+        const years = `${startYear} — ${endYear}`
 
         return (
-          <li>
+          <li class="edu-item">
             <article>
-              <header>
-                <div>
+              <header class="edu-header">
+                <div class="edu-meta">
                   <h3>{institution}</h3>
+                  <h4>{studyType} {area ? `· ${area}` : ''}</h4>
                 </div>
 
-                <time style="text-align:end">{years}</time>
+                <time>{years}</time>
               </header>
-
-              <footer>
-                <p>{studyType} en {area}</p>
-              </footer>
             </article>
           </li>
         )
@@ -37,39 +34,67 @@ const { class: className } = Astro.props;
 </Section>
 
 <style>
-  ul {
+  .edu-list {
     display: flex;
     flex-direction: column;
-    gap: var(--sp-6);
+    gap: var(--sp-4);
   }
 
-  article h3 {
-    font-weight: 500;
-    color: var(--text-primary);
-    font-size: 1.05rem;
+  .edu-item article {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-1);
   }
 
-  header {
+  .edu-header {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-bottom: 4px;
+    gap: var(--sp-2);
+  }
+
+  .edu-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .edu-meta h3 {
+    font-size: var(--fs-sm);
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .edu-meta h4 {
+    color: var(--text-secondary);
+    font-size: var(--fs-xs);
+    font-weight: 400;
   }
 
   time {
     color: var(--text-tertiary);
     font-size: var(--fs-xs);
-    min-width: 102px;
+    font-weight: 500;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
   }
 
-  footer p {
-    color: var(--text-secondary);
-    font-size: var(--fs-sm);
+  @media (max-width: 700px) {
+    .edu-header {
+      flex-direction: column;
+      gap: 2px;
+    }
   }
 
-  @media (width <= 700px) {
+  @media print {
+    .edu-meta h3 {
+      color: #000 !important;
+    }
+    .edu-meta h4 {
+      color: #3f3f46 !important;
+    }
     time {
-      text-align: right;
+      color: #52525b !important;
     }
   }
 </style>

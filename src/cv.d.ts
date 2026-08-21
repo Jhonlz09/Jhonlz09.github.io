@@ -128,10 +128,14 @@ interface Projects {
   isActive: boolean
   description: string
   highlights: Highlight
-  url: string
+  url?: string
   github?: string
   architecture_summary?: string
   images?: Array<{ src: string; caption: string }>
+  demo_credentials?: {
+    user: string
+    password: string
+  }
 }
 
 interface Interests {
@@ -144,4 +148,5 @@ interface References {
   reference: string
 }
 
-type Highlight = Array<String>
+type Highlight = Array<string>
+

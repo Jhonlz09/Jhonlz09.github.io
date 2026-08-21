@@ -1,12 +1,13 @@
 ---
 import Section from "../Section.astro"
-
+import Check from "@/icons/Check.astro"
 import { work } from "@cv"
+
 const { class: className } = Astro.props;
 ---
 
-<Section title="Experiencia" class={`experience-section ${className || ''}`}>
-  <ul>
+<Section title="Experiencia Laboral" class={`experience-section ${className || ''}`}>
+  <ul class="jobs-list">
     {
       work.map(
         ({ name, startDate, endDate, position, summary, highlights, url }) => {
@@ -15,48 +16,42 @@ const { class: className } = Astro.props;
             endDate != null ? new Date(endDate).getFullYear() : "Actual"
 
           return (
-            <li>
+            <li class="job-item">
               <article>
-                <header>
-                  <div>
+                <header class="job-header">
+                  <div class="job-meta">
                     <h3>
-                      <a href={url} title={`Ver ${name}`} target="_blank">
-                        {name}
-                      </a>
+                      {url ? (
+                        <a href={url} title={`Ver ${name}`} target="_blank" rel="noopener noreferrer">
+                          {name}
+                        </a>
+                      ) : (
+                        <span>{name}</span>
+                      )}
                     </h3>
                     <h4>{position}</h4>
                   </div>
 
-                  <div style="white-space:nowrap;">
-                    <time 
-                      datetime={startDate}
-                      data-title={startDate}>
-                        {startYear}
-                    </time>
-                    {" - "}
-                    <time 
-                      datetime={endDate}
-                      data-title={endDate}>
-                        {endYear}
-                    </time>
-                  </div>
+                  <time datetime={startDate}>
+                    {startYear} — {endYear}
+                  </time>
                 </header>
 
-                <footer>
+                <div class="job-body">
                   <p>{summary}</p>
                   {
                     highlights && highlights.length > 0 && (
                       <ul class="highlights">
                         {highlights.map((highlight) => (
                           <li>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>
+                            <Check />
                             <span>{highlight}</span>
                           </li>
                         ))}
                       </ul>
                     )
                   }
-                </footer>
+                </div>
               </article>
             </li>
           )
@@ -67,60 +62,80 @@ const { class: className } = Astro.props;
 </Section>
 
 <style>
-  ul {
+  .jobs-list {
     display: flex;
     flex-direction: column;
     gap: var(--sp-6);
   }
 
-  article h3 {
-    font-weight: 500;
-    color: var(--text-primary);
+  .job-item article {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-3);
   }
 
-  article a {
-    color: var(--text-primary);
-  }
-
-  article a:hover {
-    text-decoration: underline;
-    color: var(--accent);
-  }
-
-  article h4 {
-    color: var(--text-muted);
-    font-weight: 400;
-  }
-
-  header {
+  .job-header {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-bottom: 4px;
+    gap: var(--sp-3);
+  }
+
+  .job-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .job-meta h3 {
+    font-size: var(--fs-base);
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .job-meta h3 a {
+    color: var(--text-primary);
+    transition: color var(--duration-fast) var(--ease-out);
+  }
+
+  .job-meta h3 a:hover {
+    color: var(--accent-primary);
+  }
+
+  .job-meta h4 {
+    color: var(--text-muted);
+    font-weight: 400;
+    font-size: var(--fs-sm);
   }
 
   time {
     color: var(--text-tertiary);
     font-size: var(--fs-xs);
-    min-width: 102px;
-    cursor: default;
+    font-weight: 500;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
   }
 
-  /* ─── Highlights Grid ─── */
+  .job-body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-3);
+  }
+
   .highlights {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 8px;
-    margin-top: 16px;
-    padding-top: 16px;
+    gap: var(--sp-2);
+    margin-top: var(--sp-1);
+    padding-top: var(--sp-3);
     border-top: 1px solid var(--border-subtle);
   }
 
   .highlights li {
     display: flex;
     align-items: flex-start;
-    gap: 10px;
-    padding: 10px 14px;
+    gap: var(--sp-2);
+    padding: var(--sp-2) var(--sp-3);
     background: var(--bg-elevated);
     border: 1px solid var(--border-subtle);
     border-radius: var(--radius-sm);
@@ -131,49 +146,19 @@ const { class: className } = Astro.props;
   }
 
   .highlights li:hover {
-    border-color: var(--border-hover);
+    border-color: var(--border-default);
   }
 
-  .highlights li svg {
+  .highlights li :global(svg) {
     flex-shrink: 0;
     margin-top: 2px;
-    color: var(--accent);
+    color: var(--text-muted);
   }
 
-  /* ─── Tooltips ─── */
-  [data-title]:hover:after {
-    opacity: 1;
-    transition: all 0.1s ease-in-out 0.5s;
-    visibility: visible;
-  }
-
-  [data-title]:after {
-    content: attr(data-title);
-    background-color: var(--bg-card);
-    color: var(--text-primary);
-    font-size: .75rem;
-    font-family: inherit;
-    position: absolute;
-    padding: .2rem .5rem;
-    bottom: -1.4rem;
-    left: 50%;
-    white-space: nowrap;
-    box-shadow: 1px 1px 1px rgba(0,0,0,0.5);
-    opacity: 0;
-    border: 1px solid var(--border-card);
-    z-index: 99999;
-    visibility: hidden;
-    border-radius: 6px;
-  }
-
-  [data-title] {
-    position: relative;
-  }
-
-  /* ─── Responsive ─── */
-  @media (width <= 700px) {
-    time {
-      text-align: right;
+  @media (max-width: 700px) {
+    .job-header {
+      flex-direction: column;
+      gap: var(--sp-1);
     }
 
     .highlights {
@@ -181,19 +166,18 @@ const { class: className } = Astro.props;
     }
   }
 
-  /* ─── Print ─── */
   @media print {
     .highlights {
-      border-top: 1px solid #ccc !important;
+      border-top: 1px solid #e4e4e7 !important;
     }
 
     .highlights li {
       background: transparent !important;
-      border: 1px solid #ccc !important;
+      border: 1px solid #e4e4e7 !important;
       color: #000 !important;
     }
 
-    .highlights li svg {
+    .highlights li :global(svg) {
       color: #000 !important;
     }
   }

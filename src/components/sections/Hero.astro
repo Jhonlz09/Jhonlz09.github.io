@@ -4,16 +4,17 @@ import Section from "@/components/Section.astro"
 import Phone from "@/icons/Phone.astro"
 import LinkedIn from "@/icons/LinkedIn.astro"
 import GitHub from "@/icons/GitHub.astro"
+import Mail from "@/icons/Mail.astro"
 import WorldMap from "@/icons/WorldMap.astro"
-import type { SocialIcon } from "@/types"
 
 const { name, label, image, location, profiles, phone, email, summary } = basics
 const { city, region } = location
 
-const SOCIAL_ICONS: SocialIcon = {
+const SOCIAL_ICONS: Record<string, (_props: Record<string, unknown>) => unknown> = {
   GitHub,
   LinkedIn,
-  Phone
+  Phone,
+  Mail
 }
 
 const linkedInfo = profiles.find(({ network }) => network === "LinkedIn")
@@ -26,27 +27,34 @@ const { class: className } = Astro.props;
 <Section class={`hero-section ${className || ''}`}>
   <div class="container">
     <div class="info">
-      <h1>{name}</h1>
-      <h2>{label}</h2>
+      <header class="hero-header">
+        <h1>{name}</h1>
+        <h2>{label}</h2>
+      </header>
+
       <p class="summary">{summary}</p>
-      <span>
+
+      <div class="location-badge">
         <WorldMap />
-        {city}, {region}
-      </span>
+        <span>{city}, {region}</span>
+      </div>
+
       <footer class="print">
         {printInfo}
       </footer>
+
       <footer class="no-print actions">
         {
           email && (
             <a
               href={`mailto:${email}`}
-              title={`Enviar un correo electrónico a ${name} al correo ${email}`}
+              title={`Enviar un correo a ${name} (${email})`}
               target="_blank"
               rel="noopener noreferrer"
               class="cta primary"
             >
-              Contactar
+              <Mail />
+              <span>Contactar</span>
             </a>
           )
         }
@@ -58,6 +66,7 @@ const { class: className } = Astro.props;
                 title={`Llamar a ${name} al ${phone}`}
                 class="cta secondary"
                 rel="noopener noreferrer"
+                aria-label="Teléfono"
               >
                 <Phone />
               </a>
@@ -69,12 +78,13 @@ const { class: className } = Astro.props;
               return (
                 <a
                   href={url}
-                  title={`Visitar el perfil de ${name} en ${network}`}
+                  title={`Ver perfil de ${name} en ${network}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   class="cta secondary"
+                  aria-label={network}
                 >
-                  <Icon />
+                  {Icon && <Icon />}
                 </a>
               )
             })
@@ -82,8 +92,9 @@ const { class: className } = Astro.props;
         </div>
       </footer>
     </div>
+
     <figure class="profile-figure">
-      <img src={image} alt={name} />
+      <img src={image} alt={name} width="128" height="128" />
     </figure>
   </div>
 </Section>
@@ -98,106 +109,85 @@ const { class: className } = Astro.props;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    gap: 2rem;
-    height: 100%;
+    gap: var(--sp-6);
   }
 
   .info {
     display: flex;
     flex-direction: column;
-    gap: var(--sp-4);
+    gap: var(--sp-3);
     flex: 1;
   }
 
-  .badge {
-    align-self: flex-start;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 4px 12px;
-    background: rgba(16, 185, 129, 0.1);
-    color: #10b981;
-    border: 1px solid rgba(16, 185, 129, 0.2);
-    border-radius: 9999px;
-    font-size: 0.8rem;
-    font-weight: 500;
-  }
-
-  .pulse {
-    width: 6px;
-    height: 6px;
-    background-color: #10b981;
-    border-radius: 50%;
-    display: inline-block;
-    box-shadow: 0 0 8px #10b981;
-    animation: pulse 2s infinite;
-  }
-
-  @keyframes pulse {
-    0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
-    70% { box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+  .hero-header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-1);
   }
 
   h1 {
-    font-size: var(--fs-display);
-    line-height: 1.1;
-    font-weight: 800;
-    letter-spacing: -0.04em;
-    background: linear-gradient(to bottom right, #fafafa, #a1a1aa);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    font-size: var(--fs-3xl);
+    line-height: 1.15;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--text-primary);
   }
 
   h2 {
-    color: var(--text-primary);
-    font-weight: 600;
-    font-size: var(--fs-lg);
-    text-wrap: balance;
+    color: var(--text-secondary);
+    font-weight: 500;
+    font-size: var(--fs-base);
+    line-height: 1.4;
   }
 
   .summary {
     color: var(--text-secondary);
-    font-size: var(--fs-base);
+    font-size: var(--fs-sm);
     line-height: 1.6;
-    max-width: 90%;
+    max-width: 95%;
+  }
+
+  .location-badge {
+    color: var(--text-tertiary);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-2);
+    font-size: var(--fs-xs);
+    font-weight: 500;
+  }
+
+  .location-badge :global(svg) {
+    color: var(--text-tertiary);
   }
 
   .profile-figure {
-    position: relative;
-    border-radius: var(--radius-xl);
-    padding: 4px;
-    background: linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0));
-    border: 1px solid var(--border-subtle);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   img {
     aspect-ratio: 1 / 1;
     object-fit: cover;
-    width: 128px;
+    width: 120px;
+    height: 120px;
     border-radius: var(--radius-lg);
-    filter: grayscale(100%) contrast(1.2);
-    transition: filter 0.5s var(--ease-out);
+    border: 1px solid var(--border-default);
+    background: var(--bg-elevated);
+    transition: border-color var(--duration-fast) var(--ease-out);
   }
 
   img:hover {
-    filter: grayscale(0%) contrast(1);
-  }
-
-  span {
-    color: var(--text-tertiary);
-    display: flex;
-    align-items: center;
-    gap: var(--sp-2);
-    font-size: var(--fs-sm);
-    font-weight: 500;
+    border-color: var(--border-hover);
   }
 
   .actions {
     display: flex;
     align-items: center;
     gap: var(--sp-2);
-    margin-top: var(--sp-2);
+    margin-top: var(--sp-1);
+    flex-wrap: wrap;
   }
 
   .socials {
@@ -209,89 +199,93 @@ const { class: className } = Astro.props;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 0.6rem 1.25rem;
+    gap: var(--sp-2);
+    height: 36px;
+    padding: 0 var(--sp-4);
     border-radius: var(--radius-sm);
-    font-size: var(--fs-sm);
-    font-weight: 600;
-    transition: all var(--duration-fast) var(--ease-out);
+    font-size: var(--fs-xs);
+    font-weight: 500;
+    transition:
+      background-color var(--duration-fast) var(--ease-out),
+      border-color var(--duration-fast) var(--ease-out),
+      color var(--duration-fast) var(--ease-out);
     text-decoration: none;
     cursor: pointer;
+    font-family: inherit;
+    white-space: nowrap;
   }
 
   .cta.primary {
-    background: var(--accent);
-    color: #fff;
-    border: none;
-    box-shadow: 0 4px 14px 0 rgba(139, 92, 246, 0.3);
+    background: var(--text-primary);
+    color: var(--bg-base);
+    border: 1px solid var(--text-primary);
   }
 
   .cta.primary:hover {
-    background: var(--accent-hover);
-    transform: translateY(-1px);
-    box-shadow: 0 6px 20px rgba(139, 92, 246, 0.35);
+    background: #ffffff;
+    border-color: #ffffff;
+    color: #000000;
   }
 
   .cta.secondary {
     background: var(--bg-elevated);
-    color: var(--text-primary);
-    border: 1px solid var(--border-default);
-    padding: 0.6rem;
+    color: var(--text-secondary);
+    border: 1px solid var(--border-subtle);
+    padding: 0;
+    width: 36px;
   }
 
   .cta.secondary:hover {
     background: rgba(255, 255, 255, 0.08);
-    border-color: var(--border-hover);
-    transform: translateY(-1px);
+    border-color: var(--border-default);
+    color: var(--text-primary);
   }
 
   @media (max-width: 700px) {
     .container {
       flex-direction: column-reverse;
-      text-align: center;
+      text-align: left;
+      align-items: flex-start;
+      gap: var(--sp-4);
     }
+
     .info {
-      align-items: center;
-    }
-    .summary {
-      max-width: 100%;
-    }
-    h1 {
-      font-size: var(--fs-4xl);
-    }
-    .actions {
-      flex-direction: column;
+      align-items: flex-start;
       width: 100%;
     }
-    .cta.primary {
+
+    h1 {
+      font-size: var(--fs-2xl);
+    }
+
+    .profile-figure {
+      align-self: flex-start;
+    }
+
+    img {
+      width: 88px;
+      height: 88px;
+    }
+
+    .actions {
       width: 100%;
     }
   }
 
   @media print {
-    .pulse {
-      display: none !important;
-    }
-    .badge {
-      border: 1px solid #000 !important;
-      background: transparent !important;
-      color: #000 !important;
-    }
     h1 {
-      background: none !important;
-      -webkit-text-fill-color: #000 !important;
       color: #000 !important;
+    }
+    h2 {
+      color: #333 !important;
     }
     .profile-figure {
-      background: none !important;
       border: none !important;
-      padding: 0 !important;
     }
     img {
-      filter: none !important;
-      width: 120px !important;
-    }
-    .info {
-      gap: 0.5rem !important;
+      width: 90px !important;
+      height: 90px !important;
+      border: 1px solid #ccc !important;
     }
   }
 </style>

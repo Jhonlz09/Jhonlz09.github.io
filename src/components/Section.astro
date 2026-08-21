@@ -1,5 +1,4 @@
 ---
-// se ejecuta en el servidor o en build time <----
 const { title, class: className } = Astro.props;
 ---
 
@@ -16,10 +15,10 @@ const { title, class: className } = Astro.props;
     padding: var(--sp-6);
     display: flex;
     flex-direction: column;
-    gap: var(--sp-6);
+    gap: var(--sp-4);
     position: relative;
     overflow: hidden;
-    transition: border-color var(--duration-normal) var(--ease-out);
+    transition: border-color var(--duration-fast) var(--ease-out);
   }
 
   section:hover {
@@ -28,9 +27,10 @@ const { title, class: className } = Astro.props;
 
   h2 {
     margin: 0;
-    font-weight: 700;
-    line-height: 1.2;
-    font-size: var(--fs-2xl);
+    font-weight: 600;
+    line-height: 1.3;
+    font-size: var(--fs-lg);
+    letter-spacing: -0.02em;
     color: var(--text-primary);
     display: flex;
     align-items: center;
@@ -41,6 +41,7 @@ const { title, class: className } = Astro.props;
     section {
       padding: var(--sp-4);
       border-radius: var(--radius-md);
+      gap: var(--sp-3);
     }
   }
 </style>
