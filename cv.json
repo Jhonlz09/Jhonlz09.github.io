@@ -85,32 +85,45 @@
       "name": "Backend & APIs",
       "level": "Avanzado",
       "keywords": [
+        ".NET",
+        "C#",
         "Node.js",
         "Bun",
         "Elysia",
-        "PHP",
-        "Redis"
+        "PHP"
       ]
     },
     {
-      "name": "Data & ORM",
+      "name": "Data & Storage",
       "level": "Intermedio",
       "keywords": [
         "PostgreSQL",
+        "SQL Server",
         "MySQL",
-        "Drizzle ORM",
-        "TanStack"
+        "Redis",
+        "Drizzle ORM"
       ]
     },
     {
-      "name": "Core & Tools",
+      "name": "Ecosistema Microsoft & Cloud",
+      "level": "Avanzado",
+      "keywords": [
+        "Azure",
+        "Azure DevOps",
+        "PowerShell",
+        "Windows Server",
+        "Active Directory"
+      ]
+    },
+    {
+      "name": "DevOps & Core Tools",
       "level": "Avanzado",
       "keywords": [
         "TypeScript",
-        "Python",
+        "Docker",
         "Git",
         "GitHub",
-        "Docker"
+        "Python"
       ]
     }
   ],

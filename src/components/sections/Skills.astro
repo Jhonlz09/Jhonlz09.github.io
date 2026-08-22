@@ -19,6 +19,14 @@ import Python from "@/icons/python.astro"
 import Git from "@/icons/git.astro"
 import GitHub from "@/icons/GitHub.astro"
 import Docker from "@/icons/Docker.astro"
+import CSharp from "@/icons/CSharp.astro"
+import DotNet from "@/icons/DotNet.astro"
+import Azure from "@/icons/Azure.astro"
+import SqlServer from "@/icons/SqlServer.astro"
+import PowerShell from "@/icons/PowerShell.astro"
+import AzureDevOps from "@/icons/AzureDevOps.astro"
+import WindowsServer from "@/icons/WindowsServer.astro"
+import ActiveDirectory from "@/icons/ActiveDirectory.astro"
 
 import { skills } from "@cv"
 
@@ -41,7 +49,16 @@ const SKILLS_ICONS: Record<string, (_props: Record<string, unknown>) => unknown>
   Python,
   Git,
   GitHub,
-  Docker
+  Docker,
+  "C#": CSharp,
+  ".NET": DotNet,
+  Azure,
+  "Microsoft Azure": Azure,
+  "SQL Server": SqlServer,
+  PowerShell,
+  "Azure DevOps": AzureDevOps,
+  "Windows Server": WindowsServer,
+  "Active Directory": ActiveDirectory
 }
 
 const { class: className } = Astro.props;
