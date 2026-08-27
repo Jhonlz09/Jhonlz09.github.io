@@ -64,6 +64,46 @@
       "endDate": "null",
       "score": "",
       "courses": []
+    },
+    {
+      "institution": "Tecnológico Universitario Espíritu Santo",
+      "url": "https://www.ucsg.edu.ec/",
+      "area": "Curso de automatizacion y RPA",
+      "studyType": "Grado",
+      "startDate": "2025-06-01",
+      "endDate": "2025-08-01",
+      "score": "",
+      "courses": []
+    },
+     {
+      "institution": "Crehana",
+      "url": "https://www.ucsg.edu.ec/",
+      "area": "Scrum fundamentals y principios SOLID",
+      "studyType": "Grado",
+      "startDate": "2025-08-01",
+      "endDate": "2025-09-01",
+      "score": "",
+      "courses": []
+    },
+    {
+      "institution": "Crehana",
+      "url": "https://www.ucsg.edu.ec/",
+      "area": "Curso Data Science",
+      "studyType": "Grado",
+      "startDate": "2025-06-01",
+      "endDate": "2025-08-01",
+      "score": "",
+      "courses": []
+    },
+    {
+      "institution": "Tecnológico Universitario Espíritu Santo",
+      "url": "https://www.ucsg.edu.ec/",
+      "area": "Masterclass seguridad de datos con IA: protegiendo la integridad de los sistemas BI",
+      "studyType": "Grado",
+      "startDate": "2025-06-01",
+      "endDate": "2025-08-01",
+      "score": "",
+      "courses": []
     }
   ],
   "awards": [],
@@ -100,8 +140,7 @@
         "PostgreSQL",
         "SQL Server",
         "MySQL",
-        "Redis",
-        "Drizzle ORM"
+        "Redis"
       ]
     },
     {
@@ -109,10 +148,8 @@
       "level": "Avanzado",
       "keywords": [
         "Azure",
-        "Azure DevOps",
         "PowerShell",
-        "Windows Server",
-        "Active Directory"
+        "Windows Server"
       ]
     },
     {
