@@ -175,7 +175,38 @@
     }
   ],
   "interests": [],
-  "references": [],
+  "references": [
+    {
+      "name": "Ing. Ian Muñoz",
+      "type": "Laboral",
+      "title": "Gerente de Operaciones",
+      "company": "Aistermcon S.A.",
+      "area": "Infraestructura & Operaciones",
+      "phone": "+593 99 2685050",
+      "email": "imunoz@aistermcon.com",
+      "reference": "Supervisor directo durante la implementación y despliegue del ERP corporativo."
+    },
+    {
+      "name": "Lcda. Esthela Benitez",
+      "type": "Laboral",
+      "title": "Contralora academica",
+      "company": "Tecnológico Universitario Espíritu Santo",
+      "area": "Docencia e investigación",
+      "phone": "+593 99 386 1200",
+      "email": "ebenitez@tes.edu.ec",
+      "reference": "Coordinación directa en la automatización del módulo de control de asistencia y silabos."
+    },
+    {
+      "name": "Sr. Luis Mecias",
+      "type": "Personal",
+      "phone": "+593 99 631 3465"
+    },
+    {
+      "name": "Sr. William Manotoa",
+      "type": "Personal",
+      "phone": "+593 98 422 0497"
+    }
+  ],
   "projects": [
     {
       "name": "Aistermcon - ERP Corporativo e Infraestructura",

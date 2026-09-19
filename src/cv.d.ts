@@ -143,9 +143,15 @@ interface Interests {
   keywords: Array<string>
 }
 
-interface References {
+export interface References {
   name: string
-  reference: string
+  type: "Laboral" | "Personal" | string
+  phone: string
+  title?: string
+  company?: string
+  area?: string
+  email?: string
+  reference?: string
 }
 
 type Highlight = Array<string>
